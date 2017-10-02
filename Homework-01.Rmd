@@ -1,0 +1,108 @@
+---
+title: "Homework-01"
+author: "Julie Jung"
+date: "October 2, 2017"
+output: html_document
+---
+
+CHALLENGE #1: 
+
+First, create a vector of 1 word character strings comprising the first line of the Ulysses, by James Joyce: “Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.” Then, extract every third element of this vector.
+
+```{r}
+library(stringr)
+
+Sentence <- "Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed."
+
+#removes punction and spectial characters from a string
+SentenceSansPunc<-gsub("[[:punct:]]","", Sentence)
+
+#split by words
+Words <- str_split(SentenceSansPunc, " ")
+
+Word_list <- unlist(Words[seq(from = 1, to = length(Words), by=3)])
+
+
+#extract every third word
+Every_third <- Word_list[seq(1, length(Word_list), 3)]
+
+#another way
+Every_third_alternative <- Word_list[c(TRUE, FALSE, FALSE)]
+
+```
+
+CHALLENGE #2: 
+
+```{r}
+m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+m
+
+#Given the matrix, m, above, extract the 2nd, 3rd, and 6th columns and assign them to the variable x
+x <- m[,c(2,3,6)]
+x
+
+#Given the matrix, m, above, extract the 6th to 8th row and assign them to the variable x
+
+x <- m[6:8, ]
+x
+
+#Given the matrix, m, above, extract the elements from row 2, column 2 to row 6, column 9 and assign them to the variable x
+x <- c(m[2:8,2],m[,3:8], m[1:6,9])
+x
+  
+```
+
+CHALLENGE #3:
+
+```{r}
+#Construct a 4-dimensional, 400 element array (5 x 5 x 4 x 4) named a consisting of the numbers 400 to 1 (i.e., a descending series)
+
+a <- array(data=400:1, dim=c(5,5,4,4))
+
+#Given this matrix, what would the following return?
+a[1, 1, 1, 2]
+
+a[2, 3, 2, ]
+
+a[1:5, 1:5, 3, 3]
+
+```
+CHALLENGE #4:
+
+```{r}
+#Create a list representing this (simplified) primate taxonomy. HINT: you can use lists as elements in a list.
+
+Platyrrhini <- list("Cebidae", "Atelidae", "Pitheciidae")
+Catarrhini <- list("Cercopithecidae", "Hylobatidae", "Hominidae")
+Tarsioidea <- list("Tarsiidae")
+Anthropoidea <- list (Platyrrhini, Catarrhini)
+Haplorhini <- list(Anthropoidea, Tarsioidea)
+
+Lorisoidea <- list("Lorisidae", "Galagidae")
+Lemuroidea <- list("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae", "Daubentoniidae")
+Strepsirhini <- list(Lorisoidea, Lemuroidea)
+Primates <- list(Haplorhini, Strepsirhini)
+
+```
+
+CHALLENGE #5: 
+
+```{r}
+
+#Store the following numbers as a 5 x 3 matrix: 3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2. Be sure to fill the matrix ROWWISE.
+m <- matrix(c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), nrow=5, ncol=3, byrow=TRUE)
+
+#Coerce the matrix to a data frame.
+df <- data.frame(m)
+
+#As a data frame, coerce the second column to be logical-valued
+#str(df[,2]) #commented out, but used to check str before and after coersion
+df[,2]<-as.logical(df[,2])
+#str(df[,2])
+#As a data frame, coerce the third column to be factor-valued
+#str(df[,3])
+df[,3]<-as.factor(df[,3])
+#str(df[3])
+#When you are done, use the str() command to show the data type for each variable in your dataframe.
+str(df)
+```
